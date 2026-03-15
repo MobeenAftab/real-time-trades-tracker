@@ -11,3 +11,15 @@ Angular, Tailwindcss
 
 ## Server
 .NET webapi
+
+# Public APIs
+Following list of APIs have been chosen as they offer websockets for live time data retrevial for free.
+
+## Blockchain
+
+[WebSocket API Real-Time blockchain data](https://www.blockchain.com/explorer/api/api_websocket)
+
+## Coinbase Exchange
+
+[Exchange APIs](https://docs.cdp.coinbase.com/exchange/websocket-feed/overview)
+
