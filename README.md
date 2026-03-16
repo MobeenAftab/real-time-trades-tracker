@@ -4,6 +4,16 @@ Interactive data driven dashboard that consumes real time financial APIs
 # Running 
 Requires two terminals, cd into client `npm run start`, cd into server using second terminal and `dotnet run`.
 
+# Commands
+
+## Server
+
+Run HTTPS
+`dotnet run --launch-profile https`
+
+Generate controller
+`dotnet aspnet-codegenerator controller -name UserController -async -api -m User -dc UserContext -outDir Controllers`
+
 # Tech Stack
 
 ## Cleint
