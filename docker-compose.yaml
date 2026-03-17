@@ -1,0 +1,17 @@
+name: real-time-trades-tracker
+services:
+  postgres:
+    image: postgres:18.3-bookworm
+    container_name: postgres-db
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 123456789
+      POSTGRES_DB: real-time-trades-tracker-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
