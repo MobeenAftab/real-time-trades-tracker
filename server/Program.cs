@@ -17,8 +17,11 @@ builder.Services.AddOpenApiDocument(config =>
     config.Version = "v1";
 });
 
-builder.Services.AddDbContext<UserContext>(opt =>
-    opt.UseInMemoryDatabase("UserList"));
+builder.Services.AddDbContextPool<UserContext>(opt =>
+    opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
+    .UseSnakeCaseNamingConvention());
+
+builder.Logging.AddSimpleConsole(c => c.SingleLine = true);
 
 var app = builder.Build();
 
@@ -61,6 +64,12 @@ app.MapGet("/weatherforecast", () =>
 app.UseAuthorization();
 
 app.MapControllers();
+
+await using var scope = app.Services.CreateAsyncScope();
+var db = scope.ServiceProvider.GetRequiredService<UserContext>();
+var canConnect = await db.Database.CanConnectAsync();
+app.Logger.LogInformation("Can connect to database: {CanConnect}", canConnect);
+
 
 app.Run();
 

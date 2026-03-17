@@ -3,7 +3,7 @@ services:
   postgres:
     image: postgres:18.3-bookworm
     container_name: postgres-db
-    restart: always
+    restart: unless-stopped
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: 123456789
@@ -11,7 +11,8 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./pgdata:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql
 
 volumes:
-  pgdata:
+  postgres_data:
+    driver: local

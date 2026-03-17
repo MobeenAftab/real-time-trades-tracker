@@ -10,4 +10,12 @@ public class UserContext : DbContext
     }
 
     public DbSet<User> Users { get; set; } = null!;
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder
+            .Entity<User>()
+            .Property(e => e.CreatedAt)
+            .HasDefaultValueSql("now()");
+    }
 }
